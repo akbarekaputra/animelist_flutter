@@ -9,23 +9,23 @@ class RecommendedAnime extends StatefulWidget {
 }
 
 class _RecommendedAnimeState extends State<RecommendedAnime> {
-  late Future<Map<String, dynamic>> _topAnime;
+  late Future<Map<String, dynamic>> _recommendedAnime;
+
+  Future<Map<String, dynamic>> fetchRecommendedAnime() async {
+    try {
+      final anime =
+          await getNestedAnimeResponse("recommendations/anime", "entry");
+      return reproduceRecommendedAnime(anime, 8);
+    } catch (e) {
+      print('Error fetching recommended anime: $e');
+      throw e;
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _topAnime = fetchTopAnime();
-  }
-
-  Future<Map<String, dynamic>> fetchTopAnime() async {
-    try {
-      final Map<String, dynamic> anime =
-          await getAnimeResponse("top/anime", "limit=8");
-      return anime;
-    } catch (e) {
-      print('Error fetching top anime: $e');
-      throw e;
-    }
+    _recommendedAnime = fetchRecommendedAnime();
   }
 
   @override
@@ -42,7 +42,7 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 10),
                     child: Text(
-                      "Top Anime",
+                      "Recommended Anime",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
@@ -56,22 +56,22 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
         Padding(
           padding: const EdgeInsets.only(left: 20),
           child: SizedBox(
-            height: 160,
+            height: 150,
             child: FutureBuilder<Map<String, dynamic>>(
-              future: _topAnime,
+              future: _recommendedAnime,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData) {
-                  final topAnime = snapshot.data!;
+                  final recommendedAnime = snapshot.data!;
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: topAnime['data']?.length ?? 0,
+                    itemCount: recommendedAnime['data']?.length ?? 0,
                     itemBuilder: (context, index) {
-                      final imageUrl = topAnime['data'][index]['images']['webp']
-                          ['image_url'];
+                      final imageUrl = recommendedAnime['data'][index]['images']
+                          ['webp']['image_url'];
                       return Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: Column(
@@ -80,12 +80,13 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(5),
                               child: GestureDetector(
-                                onTap: () =>
-                                    print(topAnime['data'][index]['mal_id']),
+                                onTap: () {
+                                  print(recommendedAnime['data'][index]
+                                      ['mal_id']);
+                                },
                                 child: Image.network(
                                   imageUrl.toString(),
-                                  height: 160,
-                                  width: 90,
+                                  height: 150,
                                   fit: BoxFit.cover,
                                 ),
                               ),

@@ -6,6 +6,7 @@ import 'package:animelist_flutter/widgets/banner_image.dart';
 import 'package:animelist_flutter/widgets/bottom_nav.dart';
 import 'package:animelist_flutter/widgets/continue_watching.dart';
 import 'package:animelist_flutter/widgets/populer_anime.dart';
+import 'package:animelist_flutter/widgets/recommended_anime.dart';
 import 'package:flutter/material.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -16,46 +17,6 @@ class MobileScreenLayout extends StatefulWidget {
 }
 
 class _MobileScreenLayoutState extends State<MobileScreenLayout> {
-  late Map<String, dynamic> topAnime;
-  late List<dynamic> recommendedAnime;
-
-  Future<void> fetchTopAnime() async {
-    try {
-      final Map<String, dynamic> anime =
-          await getAnimeResponse("top/anime", "limit=8");
-      setState(() {
-        topAnime = anime;
-      });
-      print('Top Anime: $topAnime');
-    } catch (e) {
-      print('Error fetching top anime: $e');
-    }
-  }
-
-  List<dynamic> reproduce(List<dynamic> list, int limit) {
-    // Return a sublist of the provided list up to the specified limit
-    return list.take(limit).toList();
-  }
-
-  Future<void> fetchRecommendedAnime() async {
-    try {
-      final anime =
-          await getNestedAnimeResponse("recommendations/anime", "entry");
-      setState(() {
-        recommendedAnime = reproduce(anime, 8);
-      });
-      print('Recommended Anime: $recommendedAnime');
-    } catch (e) {
-      print('Error fetching recommended anime: $e');
-    }
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fetchRecommendedAnime();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +49,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 20, top: 5),
               child: BannerImage(),
             ),
             Padding(
@@ -117,6 +78,10 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
               child: ContinueWatching(),
             ),
             PopulerAnime(),
+            RecommendedAnime(),
+            SizedBox(
+              height: 500,
+            )
           ],
         ),
       ),

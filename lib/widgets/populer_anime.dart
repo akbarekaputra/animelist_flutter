@@ -56,7 +56,7 @@ class _PopulerAnimeState extends State<PopulerAnime> {
         Padding(
           padding: const EdgeInsets.only(left: 20),
           child: SizedBox(
-            height: 160,
+            height: 150,
             child: FutureBuilder<Map<String, dynamic>>(
               future: _topAnime,
               builder: (context, snapshot) {
@@ -80,12 +80,12 @@ class _PopulerAnimeState extends State<PopulerAnime> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(5),
                               child: GestureDetector(
-                                onTap: () =>
-                                    print(topAnime['data'][index]['mal_id']),
+                                onTap: () {
+                                  print(topAnime['data'][index]['mal_id']);
+                                },
                                 child: Image.network(
                                   imageUrl.toString(),
-                                  height: 160,
-                                  width: 90,
+                                  height: 150,
                                   fit: BoxFit.cover,
                                 ),
                               ),
