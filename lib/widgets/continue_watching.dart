@@ -7,47 +7,68 @@ class ContinueWatching extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: List.generate(
-          5,
-          (index) => Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      height: 170,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image.asset(
-                    "assets/placeholder_16_9.png",
-                    height: 90,
-                    width: 160,
-                    fit: BoxFit.cover,
-                  ),
+                Text(
+                  "Continue Watching",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
-                SizedBox(height: 7),
-                Stack(
-                  children: [
-                    Container(
-                      width: 160,
-                      height: 3,
-                      color: bgSecondaryColor,
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Container(
-                        width: 70,
-                        height: 3,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
+                Icon(Icons.navigate_next),
               ],
             ),
-          ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.asset(
+                            "assets/placeholder_16_9.png",
+                            height: 90,
+                            width: 160,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(height: 7),
+                        Stack(
+                          children: [
+                            Container(
+                              width: 160,
+                              height: 3,
+                              color: bgSecondaryColor,
+                            ),
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              child: Container(
+                                width: 70,
+                                height: 3,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

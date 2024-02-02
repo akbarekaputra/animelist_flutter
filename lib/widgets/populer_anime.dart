@@ -1,4 +1,5 @@
-import 'package:animelist_flutter/libs/api_libs.dart';
+import 'package:animelist_flutter/api_libs.dart';
+import 'package:animelist_flutter/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class PopulerAnime extends StatefulWidget {
@@ -61,7 +62,10 @@ class _PopulerAnimeState extends State<PopulerAnime> {
               future: _topAnime,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: CircularProgressIndicator(
+                    color: primaryColor,
+                  ));
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData) {

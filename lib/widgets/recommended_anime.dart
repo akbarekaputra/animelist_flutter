@@ -1,4 +1,6 @@
-import 'package:animelist_flutter/libs/api_libs.dart';
+import 'package:animelist_flutter/api_libs.dart';
+import 'package:animelist_flutter/utils/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RecommendedAnime extends StatefulWidget {
@@ -13,12 +15,14 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
 
   Future<Map<String, dynamic>> fetchRecommendedAnime() async {
     try {
-      final anime =
+      final nestedAnimeResponse =
           await getNestedAnimeResponse("recommendations/anime", "entry");
-      return reproduceRecommendedAnime(anime, 8);
+      return reproduce(nestedAnimeResponse, 8);
     } catch (e) {
-      print('Error fetching recommended anime: $e');
-      throw e;
+      if (kDebugMode) {
+        print('Error fetching recommended anime: $e');
+      }
+      rethrow;
     }
   }
 
@@ -61,7 +65,10 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
               future: _recommendedAnime,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    color: primaryColor,
+                  ));
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData) {
@@ -81,8 +88,11 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
                               borderRadius: BorderRadius.circular(5),
                               child: GestureDetector(
                                 onTap: () {
-                                  print(recommendedAnime['data'][index]
-                                      ['mal_id']);
+                                  if (kDebugMode) {
+                                    print(
+                                      recommendedAnime['data'][index]['mal_id'],
+                                    );
+                                  }
                                 },
                                 child: Image.network(
                                   imageUrl.toString(),
@@ -97,7 +107,7 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
                     },
                   );
                 } else {
-                  return Center(child: Text('No data available'));
+                  return const Center(child: Text('No data available'));
                 }
               },
             ),

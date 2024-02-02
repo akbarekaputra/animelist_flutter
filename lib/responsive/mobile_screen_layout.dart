@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:animelist_flutter/libs/api_libs.dart';
+import 'package:animelist_flutter/api_libs.dart';
 import 'package:animelist_flutter/utils/colors.dart';
 import 'package:animelist_flutter/widgets/banner_image.dart';
 import 'package:animelist_flutter/widgets/bottom_nav.dart';
@@ -53,27 +53,6 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
               child: BannerImage(),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 20, left: 20, top: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: Text(
-                          "Continue Watching",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                      ),
-                      Icon(Icons.navigate_next),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Padding(
               padding: EdgeInsets.only(left: 20),
               child: ContinueWatching(),
             ),
@@ -86,12 +65,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
         ),
       ),
       extendBody: true,
-      bottomNavigationBar: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: const BottomNav(),
-        ),
-      ),
+      bottomNavigationBar: const BottomNav(),
     );
   }
 }

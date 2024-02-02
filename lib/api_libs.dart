@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 Future<Map<String, dynamic>> getAnimeResponse(
     String resource, String query) async {
   final apiUrl = 'https://api.jikan.moe/v4/$resource?$query';
+
   final response = await http.get(Uri.parse(apiUrl));
 
   if (response.statusCode == 200) {
@@ -23,11 +25,12 @@ Future<List<dynamic>> getNestedAnimeResponse(
     final List<dynamic> data = response['data'];
 
     List<dynamic> itemList = [];
-    data.forEach((item) {
+    for (var i = 0; i < data.length; i++) {
+      var item = data[i];
       if (item.containsKey(objectProperty)) {
         itemList.addAll(item[objectProperty]);
       }
-    });
+    }
 
     return itemList;
   } else {
@@ -35,8 +38,7 @@ Future<List<dynamic>> getNestedAnimeResponse(
   }
 }
 
-Future<Map<String, dynamic>> reproduceRecommendedAnime(
-    List<dynamic> data, int gap) async {
+Future<Map<String, dynamic>> reproduce(List<dynamic> data, int gap) async {
   try {
     if (data != null && data.isNotEmpty) {
       final random = Random();
@@ -46,12 +48,16 @@ Future<Map<String, dynamic>> reproduceRecommendedAnime(
       final response = {'data': data.sublist(first, last)};
       return response;
     } else {
-      print("Data is undefined or empty: $data");
-      // Throw an error or return a default value here
-      return {'data': []}; // Returning an empty array as a default value
+      if (kDebugMode) {
+        print("Data is undefined or empty: $data");
+      }
+
+      return {'data': []};
     }
   } catch (e) {
-    print("Error reproducing anime data: $e");
-    throw e; // Throw the error to be caught by the caller
+    if (kDebugMode) {
+      print("Error reproducing anime data: $e");
+    }
+    rethrow;
   }
 }
