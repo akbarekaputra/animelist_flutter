@@ -5,19 +5,22 @@ class BannerImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: List.generate(
-          5,
-          (index) => Padding(
-            padding: const EdgeInsets.only(right: 5),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: Image.asset(
-                "assets/placeholder_16_9.png",
-                height: 200,
+    return Padding(
+      padding: const EdgeInsets.only(top: 5, left: 20),
+      child: SizedBox(
+        height: 200,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: List.generate(
+            5,
+            (index) => Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.asset(
+                  "assets/placeholder_16_9.png",
+                  height: 200,
+                ),
               ),
             ),
           ),

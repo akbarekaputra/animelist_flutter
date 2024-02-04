@@ -1,5 +1,6 @@
 import 'package:animelist_flutter/api_libs.dart';
 import 'package:animelist_flutter/utils/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PopulerAnime extends StatefulWidget {
@@ -24,8 +25,10 @@ class _PopulerAnimeState extends State<PopulerAnime> {
           await getAnimeResponse("top/anime", "limit=8");
       return anime;
     } catch (e) {
-      print('Error fetching top anime: $e');
-      throw e;
+      if (kDebugMode) {
+        print('Error fetching top anime: $e');
+      }
+      rethrow;
     }
   }
 
@@ -34,7 +37,7 @@ class _PopulerAnimeState extends State<PopulerAnime> {
     return Column(
       children: [
         const Padding(
-          padding: EdgeInsets.only(right: 20, left: 20, top: 20),
+          padding: EdgeInsets.only(right: 20, left: 20),
           child: Column(
             children: [
               Row(
@@ -62,7 +65,7 @@ class _PopulerAnimeState extends State<PopulerAnime> {
               future: _topAnime,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                       child: CircularProgressIndicator(
                     color: primaryColor,
                   ));
@@ -84,9 +87,7 @@ class _PopulerAnimeState extends State<PopulerAnime> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(5),
                               child: GestureDetector(
-                                onTap: () {
-                                  print(topAnime['data'][index]['mal_id']);
-                                },
+                                onTap: () {},
                                 child: Image.network(
                                   imageUrl.toString(),
                                   height: 150,
@@ -100,7 +101,7 @@ class _PopulerAnimeState extends State<PopulerAnime> {
                     },
                   );
                 } else {
-                  return Center(child: Text('No data available'));
+                  return const Center(child: Text('No data available'));
                 }
               },
             ),

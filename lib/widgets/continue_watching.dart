@@ -9,7 +9,7 @@ class ContinueWatching extends StatelessWidget {
     return SizedBox(
       height: 170,
       child: Padding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 20, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,24 +43,27 @@ class ContinueWatching extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(height: 7),
-                        Stack(
-                          children: [
-                            Container(
-                              width: 160,
-                              height: 3,
-                              color: bgSecondaryColor,
-                            ),
-                            Positioned(
-                              top: 0,
-                              left: 0,
-                              child: Container(
-                                width: 70,
+                        const SizedBox(height: 5),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: 160,
                                 height: 3,
-                                color: Colors.blue,
+                                color: bgSecondaryColor,
                               ),
-                            ),
-                          ],
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                child: Container(
+                                  width: 70,
+                                  height: 3,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

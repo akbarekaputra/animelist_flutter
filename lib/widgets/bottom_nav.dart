@@ -1,24 +1,18 @@
 import 'dart:ui';
-
-import 'package:animelist_flutter/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:animelist_flutter/utils/colors.dart';
 
-class BottomNav extends StatefulWidget {
-  const BottomNav({Key? key}) : super(key: key);
+class BottomNav extends StatelessWidget {
+  final int currentPage;
+  final List<Map<String, dynamic>> navItems;
+  final Function(int) onTap;
 
-  @override
-  State<BottomNav> createState() => _BottomNavState();
-}
-
-class _BottomNavState extends State<BottomNav> {
-  String page = "Home";
-
-  List<Map<String, dynamic>> navItems = [
-    {"page": "Home", "icon": Icons.home},
-    {"page": "Series", "icon": Icons.tv},
-    {"page": "Movies", "icon": Icons.movie},
-    {"page": "Local", "icon": Icons.location_on},
-  ];
+  const BottomNav({
+    super.key,
+    required this.currentPage,
+    required this.navItems,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +27,19 @@ class _BottomNavState extends State<BottomNav> {
             children: <Widget>[
               for (int index = 0; index < navItems.length; index++)
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      page = navItems[index]["page"];
-                    });
-                  },
+                  onTap: () => onTap(index),
                   child: Column(
                     children: [
                       Icon(
                         navItems[index]["icon"],
-                        color: page == navItems[index]["page"]
+                        color: currentPage == index
                             ? primaryColor
                             : secondaryColor,
                       ),
                       Text(
                         navItems[index]["page"],
                         style: TextStyle(
-                          color: page == navItems[index]["page"]
+                          color: currentPage == index
                               ? primaryColor
                               : secondaryColor,
                         ),

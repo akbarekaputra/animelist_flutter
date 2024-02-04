@@ -1,6 +1,7 @@
 import 'package:animelist_flutter/responsive/mobile_screen_layout.dart';
 import 'package:animelist_flutter/responsive/responsive_layout.dart';
 import 'package:animelist_flutter/responsive/web_screen_layout.dart';
+import 'package:animelist_flutter/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,10 +13,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          fontFamily: 'Lato',
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: primaryColor,
+            primary: primaryColor,
+          )),
       title: 'Rabka Animelist',
-      home: Scaffold(
+      home: const Scaffold(
         body: ResponsiveLayout(
           mobileScreenLayout: MobileScreenLayout(),
           webScreenLayout: WebScreenLayout(),
