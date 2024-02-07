@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "234164023787",
+    "project_id": "animelist-flutter",
+    "storage_bucket": "animelist-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234164023787:android:a1b5027b60827f7284a9ae",
+        "android_client_info": {
+          "package_name": "com.example.animelist_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2VOdjUF3f2o5TZFJHHf9sfJZApAySmto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

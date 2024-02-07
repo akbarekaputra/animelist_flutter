@@ -1,12 +1,10 @@
 import 'dart:ui';
+import 'package:animelist_flutter/provider/drawer_toggle_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:animelist_flutter/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 class BottomNav extends StatelessWidget {
-  final int currentPage;
-  final List<Map<String, dynamic>> navItems;
-  final Function(int) onTap;
-
   const BottomNav({
     super.key,
     required this.currentPage,
@@ -14,13 +12,25 @@ class BottomNav extends StatelessWidget {
     required this.onTap,
   });
 
+  final int currentPage;
+  final List<Map<String, dynamic>> navItems;
+  final Function(int) onTap;
+
   @override
   Widget build(BuildContext context) {
+    bool _toggleValue = Provider.of<DrawerToggleProvider>(context).toggleValue;
+
+    Color _primaryColor = _toggleValue == true ? bgPrimaryColor : primaryColor;
+    Color _secondaryColor =
+        _toggleValue == true ? secondaryColor : secondaryColor;
+
     return ClipRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        filter: ImageFilter.blur(sigmaX: 25, sigmaY: 25),
         child: BottomAppBar(
-          color: bgPrimaryColor.withOpacity(0.5),
+          color: _toggleValue == true
+              ? Colors.black87.withOpacity(0.5)
+              : bgPrimaryColor.withOpacity(0.5),
           height: 68,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -33,15 +43,15 @@ class BottomNav extends StatelessWidget {
                       Icon(
                         navItems[index]["icon"],
                         color: currentPage == index
-                            ? primaryColor
-                            : secondaryColor,
+                            ? _primaryColor
+                            : _secondaryColor,
                       ),
                       Text(
                         navItems[index]["page"],
                         style: TextStyle(
                           color: currentPage == index
-                              ? primaryColor
-                              : secondaryColor,
+                              ? _primaryColor
+                              : _secondaryColor,
                         ),
                       ),
                     ],

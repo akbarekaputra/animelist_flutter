@@ -1,4 +1,4 @@
-import 'package:animelist_flutter/global_variable.dart';
+import 'package:animelist_flutter/utils/global_variable.dart';
 import 'package:flutter/material.dart';
 
 class ResponsiveLayout extends StatefulWidget {

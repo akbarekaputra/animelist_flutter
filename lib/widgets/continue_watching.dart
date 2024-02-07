@@ -1,11 +1,15 @@
 import 'package:animelist_flutter/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:animelist_flutter/provider/drawer_toggle_provider.dart';
+import 'package:provider/provider.dart';
 
 class ContinueWatching extends StatelessWidget {
   const ContinueWatching({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool _toggleValue = Provider.of<DrawerToggleProvider>(context).toggleValue;
+
     return SizedBox(
       height: 170,
       child: Padding(
@@ -13,15 +17,24 @@ class ContinueWatching extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Continue Watching",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-                Icon(Icons.navigate_next),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Continue Watching",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      color: _toggleValue == true
+                          ? bgPrimaryColor
+                          : Colors.black87,
+                    ),
+                  ),
+                  const Icon(Icons.navigate_next),
+                ],
+              ),
             ),
             const SizedBox(height: 10),
             Expanded(

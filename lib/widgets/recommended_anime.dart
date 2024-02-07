@@ -1,7 +1,9 @@
-import 'package:animelist_flutter/api_libs.dart';
+import 'package:animelist_flutter/utils/api_libs.dart';
 import 'package:animelist_flutter/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:animelist_flutter/provider/drawer_toggle_provider.dart';
+import 'package:provider/provider.dart';
 
 class RecommendedAnime extends StatefulWidget {
   const RecommendedAnime({Key? key}) : super(key: key);
@@ -34,24 +36,31 @@ class _RecommendedAnimeState extends State<RecommendedAnime> {
 
   @override
   Widget build(BuildContext context) {
+    bool _toggleValue = Provider.of<DrawerToggleProvider>(context).toggleValue;
+
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(right: 20, left: 20, top: 20),
+        Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 10),
                     child: Text(
                       "Recommended Anime",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        color: _toggleValue == true
+                            ? bgPrimaryColor
+                            : Colors.black87,
+                      ),
                     ),
                   ),
-                  Icon(Icons.navigate_next),
+                  const Icon(Icons.navigate_next),
                 ],
               ),
             ],

@@ -1,5 +1,8 @@
+import 'package:animelist_flutter/provider/drawer_toggle_provider.dart';
+import 'package:animelist_flutter/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:provider/provider.dart';
 
 class TopNav extends StatelessWidget implements PreferredSizeWidget {
   final AdvancedDrawerController advancedDrawerController;
@@ -14,10 +17,15 @@ class TopNav extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _toggleValue = Provider.of<DrawerToggleProvider>(context).toggleValue;
+
     return AppBar(
-      title: const Text(
+      backgroundColor: _toggleValue == true ? Colors.black87 : bgPrimaryColor,
+      title: Text(
         'Rabka Animelist',
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: _toggleValue == true ? bgPrimaryColor : Colors.black87),
       ),
       centerTitle: false,
       leading: Padding(
@@ -31,6 +39,7 @@ class TopNav extends StatelessWidget implements PreferredSizeWidget {
                 child: Icon(
                   value.visible ? Icons.clear : Icons.menu,
                   key: ValueKey<bool>(value.visible),
+                  color: _toggleValue == true ? bgPrimaryColor : Colors.black87,
                 ),
               );
             },
@@ -45,7 +54,7 @@ class TopNav extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(right: 15),
           child: IconButton(
             icon: const Icon(Icons.search, size: 25),
-            color: Colors.black,
+            color: _toggleValue == true ? bgPrimaryColor : Colors.black87,
             onPressed: () {},
           ),
         ),

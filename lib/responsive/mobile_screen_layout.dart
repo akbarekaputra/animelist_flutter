@@ -1,4 +1,4 @@
-import 'package:animelist_flutter/global_variable.dart';
+import 'package:animelist_flutter/utils/global_variable.dart';
 import 'package:flutter/material.dart';
 import 'package:animelist_flutter/widgets/bottom_nav.dart';
 
@@ -48,7 +48,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       body: PageView(
         controller: pageController,
         onPageChanged: onPageChanged,
-        children: homeScreenItems, // You should pass your pages here
+        children: homeScreenItems,
       ),
       extendBody: true,
       bottomNavigationBar: BottomNav(
