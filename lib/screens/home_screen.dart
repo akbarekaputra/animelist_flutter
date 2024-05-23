@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Container(
             color: _toggleValue == true ? Colors.black87 : bgPrimaryColor,
-            child: const Column(
+            child: Column(
               children: [
                 SizedBox(height: 20),
                 BannerImage(),

@@ -131,6 +131,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   ),
                                   Expanded(
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           userData["username"] ?? "",

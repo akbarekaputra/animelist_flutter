@@ -18,7 +18,7 @@ void main() async {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
         apiKey: "AIzaSyBWUE4n1ObruqecupJAwtkqfRgAaRwdNys",
-        appId: "1:234164023787:web:5f08a003240706ce84a9ae",
+        appId: "1:987931949717:web:af07b20747623a3263b99c",
         messagingSenderId: "234164023787",
         projectId: "animelist-flutter",
         storageBucket: "animelist-flutter.appspot.com",
