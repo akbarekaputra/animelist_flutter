@@ -1,10 +1,10 @@
 # Flutter Anime List App
 
-This is a Flutter app that displays a list of anime loaded from the Kalaun API and integrated with Firebase.
+This is a Flutter app that displays a list of anime loaded from the Jikan API and integrated with Firebase.
 
 ## Feature
 
-- Retrieve anime data from Kalaun API
+- Retrieve anime data from Jikan API
 - Displays a list of anime
 - User authentication with Firebase
 - Responsive design for Android and iOS
@@ -64,7 +64,7 @@ This is a Flutter app that displays a list of anime loaded from the Kalaun API a
 
 1. Launch the app on your device or emulator.
 2. Register or log in using your email and password.
-3. Browse the list of anime taken from the Kalaun API.
+3. Browse the list of anime taken from the Jikan API.
 
 ## API
 
